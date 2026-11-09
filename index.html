@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapters | Branding, Large Format Printing & Web Development</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="./assets/c-logo.png">
+    
+    <style>
+        /* ==========================================================================
+           1. CSS CUSTOM PROPERTIES (--root)
+           Easily alter the color theme by modifying these variables.
+           ========================================================================== */
+        :root {
+            --navy-dark: #0B192C;        /* Main dark navy color */
+            --navy-medium: #1E293B;      /* Card backgrounds & section darks */
+            --white: #FFFFFF;            /* Pure white */
+            --light-blue: #38BDF8;       /* Primary highlight / accent blue */
+            --light-blue-hover: #0284C7; /* Hover state for light blue */
+            --extra-light: #F0F7FF;      /* Light background highlight / text contrast */
+            --text-dark: #0F172A;        /* Light mode text */
+            --text-muted: #94A3B8;       /* Secondary subtle text */
+            --glass-bg: rgba(11, 25, 44, 0.75);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --transition-fast: 0.3s ease;
+            --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* ==========================================================================
+           2. BASE & RESET STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--navy-dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utility Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-accent {
+            color: var(--light-blue);
+        }
+
+        /* Section Titles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .sub-title {
+            color: var(--light-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+            padding: 24px 0;
+        }
+
+        .navbar.scrolled {
+            background: rgba(11, 25, 44, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 14px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--light-blue);
+        }
+
+        .logo .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--extra-light);
+            opacity: 0.85;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+            color: var(--light-blue);
+        }
+
+        .nav-btn {
+            background: var(--light-blue);
+            color: var(--navy-dark) !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            opacity: 1 !important;
+            transition: all var(--transition-fast) !important;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .nav-btn:hover {
+            background: var(--white) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION WITH IMAGE & LINEAR GRADIENT OVERLAY
+           ========================================================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Background image with dual linear gradients for dark navy dramatic depth */
+            background: 
+                linear-gradient(135deg, rgba(11, 25, 44, 0.92) 0%, rgba(11, 25, 44, 0.75) 50%, rgba(11, 25, 44, 0.95) 100%),
+                linear-gradient(to bottom, rgba(11, 25, 44, 0.4), var(--navy-dark)),
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            padding-top: 130px;
+            padding-bottom: 40px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--light-blue);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            font-weight: 400;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: var(--navy-dark);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+            transition: all var(--transition-fast);
+            border: 2px solid var(--light-blue);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--light-blue);
+            color: var(--light-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Quick Feature Tabs at Bottom of Hero */
+        .hero-tabs-container {
+            width: 100%;
+            margin-top: 60px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .tab-card {
+            padding: 20px 24px;
+            /*border-radius: 12px;*/
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+        }
+
+        .tab-card:nth-child(1) {
+            border-right: 1px solid var(--light-blue);
+        }
+
+        .tab-card:nth-child(3) {
+            border-left: 1px solid var(--light-blue);
+        }
+
+        /*.tab-card:hover, .tab-card.active {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+        }*/
+
+        .tab-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: var(--navy-dark);
+            color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: all var(--transition-fast);
+        }
+
+        /*.tab-card:hover .tab-icon, .tab-card.active .tab-icon {
+            background: var(--light-blue);
+            color: var(--navy-dark);
+            transform: scale(1.05);
+        }*/
+
+        .tab-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 2px;
+        }
+
+        .tab-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* ==========================================================================
+           5. SERVICES SECTION (Core Pillars)
+           ========================================================================== */
+        .services-section {
+            background: var(--navy-dark);
+            position: relative;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--navy-medium);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--light-blue), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .service-card:hover {
+            /*transform: translateY(-8px);*/
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--light-blue);
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--white);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            color: var(--extra-light);
+        }
+
+        /* ==========================================================================
+           6. PORTFOLIO SHOWCASE (Filterable Gallery)
+           ========================================================================== */
+        .portfolio-section {
+            background: #071220; /* Slightly darker navy background variant */
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--light-blue);
+            color: var(--navy-dark);
+            border-color: var(--light-blue);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--navy-medium);
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 25, 44, 0.95) 0%, rgba(11, 25, 44, 0.4) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-category {
+            color: var(--light-blue);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--extra-light);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           7. STATS & CALL TO ACTION SECTION
+           ========================================================================== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .cta-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .cta-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--light-blue);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Form Modal / Inline Box */
+        .contact-box {
+            background: var(--navy-medium);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(11, 25, 44, 0.6);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+        }
+
+        /* ==========================================================================
+           8. FOOTER
+           ========================================================================== */
+        footer {
+            background: #040911;
+            padding: 70px 0 30px 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 15px;
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-blue);
+            padding-left: 5px;
+        }
+
+        /* Social Media Buttons */
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .social-btn:hover {
+            background: var(--light-blue);
+            color: var(--navy-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+            border-color: var(--light-blue);
+        }
+
+        .social-btn:hover > svg > path {
+            fill: var(--navy-dark);
+        }
+
+        .social-btn > svg {
+            width: 19px;
+        }
+
+        .social-btn > svg > path {
+            fill: var(--white);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .copyright span {
+            color: var(--light-blue);
+        }
+
+        /* Custom Notification Toast (replaces alert) */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--light-blue);
+            color: var(--navy-dark);
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ==========================================================================
+           9. RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-tabs { grid-template-columns: 1fr; }
+            .cta-container { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: var(--navy-medium);
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px;
+                transition: right 0.3s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { font-size: 1rem; }
+            .section-header h2 { font-size: 2rem; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                CHAPTERS<span class="dot"></span>
+            </a>
+            
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact" class="nav-btn">Start a Project</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <header class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i> Creative Agency & Digital Studio
+            </div>
+            <h1>We Craft Visual Stories & <span>Digital Experiences</span></h1>
+            <p>Empowering forward-thinking brands through high-impact graphic design, large format printing, brand identity, and custom web development.</p>
+            
+            <div class="hero-cta-group">
+                <a href="#portfolio" class="btn-primary">
+                    Explore Our Work <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn-secondary">
+                    Get a Free Quote
+                </a>
+            </div>
+
+            <!-- Interactive Relative Tabs at Bottom of Hero -->
+            <div class="hero-tabs-container">
+                <div class="hero-tabs">
+                    <div class="tab-card active" onclick="scrollToSection('services')">
+                        <div class="tab-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="tab-info">
+                            <h4>01. Visual Branding</h4>
+                            <p>Identity & Graphic Design</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-card" onclick="scrollToSection('services')">
+                        <div class="tab-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <div class="tab-info">
+                            <h4>02. Large Format</h4>
+                            <p>High Resolution Printing</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-card" onclick="scrollToSection('services')">
+                        <div class="tab-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="tab-info">
+                            <h4>03. Digital & Web</h4>
+                            <p>Modern Web Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services-section section-padding" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-title">What We Do</span>
+                <h2>Our Core Capabilities</h2>
+            </div>
+
+            <div class="services-grid">
+                <!-- Pillar 1: Graphics Design -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3>Graphics Designing</h3>
+                        <p>Creative visual concepts that captivate audiences. From corporate collaterals to social media campaigns and editorial layouts.</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">UI/UX Layouts</span>
+                        <span class="tag">Marketing Art</span>
+                        <span class="tag">Vector Art</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Large Format Printing -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <h3>Large Format Printing</h3>
+                        <p>Precision printing for high impact physical presence. Billboard banners, vehicle wraps, trade show displays, and architectural signage.</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">Vinyl Banners</span>
+                        <span class="tag">Vehicle Wraps</span>
+                        <span class="tag">Signage</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Branding -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Brand Identity</h3>
+                        <p>Complete strategic branding system. Logo creation, brand guidelines, typography, color palettes, and brand storytelling.</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">Logo Design</span>
+                        <span class="tag">Brand Strategy</span>
+                        <span class="tag">Packaging</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Web Development -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Fast, responsive, and SEO-optimized custom websites engineered to convert visitors into loyal clients.</p>
+                    </div>
+                    <div class="service-tags">
+                        <!-- <span class="tag">React & Vue</span>
+                        <span class="tag">E-Commerce</span>
+                        <span class="tag">CMS Integration</span> -->
+                        <span class="tag">Landing pages</span>
+                        <span class="tag">Profile pages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO SECTION ==================== -->
+    <section class="portfolio-section section-padding" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-title">Featured Works</span>
+                <h2>Recent Creative Projects</h2>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="printing">Large Format</button>
+                <button class="filter-btn" data-filter="design">Graphics</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+            </div>
+
+            <!-- Grid Gallery -->
+            <div class="portfolio-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-item" data-category="branding">
+                    <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=800&auto=format&fit=crop" alt="Aura Luxury Brand" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Branding</span>
+                        <h3 class="portfolio-title">Aura Skincare Identity</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="portfolio-item" data-category="printing">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop" alt="City Festival Billboard" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Large Format Printing</span>
+                        <h3 class="portfolio-title">Metro Expo Outdoor Signage</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="portfolio-item" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Fintech Dashboard Web App" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Web Development</span>
+                        <h3 class="portfolio-title">Apex Financial Web Platform</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="portfolio-item" data-category="design">
+                    <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?q=80&w=800&auto=format&fit=crop" alt="Graphic Poster Series" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Graphics Design</span>
+                        <h3 class="portfolio-title">Neon Pulse Music Poster</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="portfolio-item" data-category="printing">
+                    <img src="https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?q=80&w=800&auto=format&fit=crop" alt="Fleet Vehicle Wrap" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Large Format Printing</span>
+                        <h3 class="portfolio-title">Vanguard Fleet Wrap Graphics</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="portfolio-item" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop" alt="Modern E-Commerce Site" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Web Development</span>
+                        <h3 class="portfolio-title">Velox E-Commerce Experience</h3>
+                        <span class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT & CTA SECTION ==================== -->
+    <section class="cta-section section-padding" id="about">
+        <div class="container cta-container">
+            <div class="cta-text">
+                <span class="sub-title text-accent">Why Work With Chapters?</span>
+                <h2>Bringing Every Chapter of Your Vision to Life</h2>
+                <p>We blend creative design with precision printing and modern digital tech under one roof. No disconnected vendors, just seamless brand execution from concept to print and code.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Quote / Contact Box -->
+            <div class="contact-box" id="contact">
+                <h3>Start Your Chapter</h3>
+                <form id="quote-form" onsubmit="handleFormSubmit(event)" action="" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Primary Service Needed...</option>
+                            <option value="graphics">Graphics Design</option>
+                            <option value="printing">Large Format Printing</option>
+                            <option value="branding">Brand Identity</option>
+                            <option value="web">Web Development</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                        Submit Project Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        CHAPTERS<span class="dot"></span>
+                    </a>
+                    <p>Elevating brands through multidisciplinary design, high-quality large format printing, and cutting-edge web development.</p>
+                    
+                    <!-- Social Media Buttons -->
+                    <div class="social-buttons">
+                        <!-- <a href="https://linkedin.com" target="_blank" class="social-btn" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a> -->
+                        <a href="https://www.instagram.com/chapters_for_art?psln=MWpqZXF2dGU2ODQwcw==" target="_blank" class="social-btn" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://x.com/misszanther?s=11" target="_blank" class="social-btn" aria-label="X Twitter">
+                            <!-- <i class="fa-brands fa-x-twitter"></i> -->
+                            <!-- <i class="fa-brands fa-x-twitter"></i> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@chapters_for_art" target="_blank" class="social-btn" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                        <!-- <a href="https://dribbble.com" target="_blank" class="social-btn" aria-label="Dribbble">
+                            <i class="fab fa-dribbble"></i>
+                        </a> -->
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Graphic Design</a></li>
+                        <li><a href="#services">Large Format Print</a></li>
+                        <li><a href="#services">Brand Strategy</a></li>
+                        <li><a href="#services">Web Development</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#portfolio">Our Work</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Get In Touch</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope text-accent"></i> hello@chaptersagency.com</li>
+                        <li><i class="fas fa-phone text-accent"></i> +256 (761) 752-794 |<br /> +256 (708) 064-339</li>
+                        <li><i class="fas fa-map-marker-alt text-accent"></i> Nasser Road, Namirembe Complex</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright at very bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <!-- © -->&COPY; 2026 <span>Chapters</span>. All rights reserved. Built with precision.
+                </div>
+                <div>
+                    Designing for high performance & luxury presentation.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast Element -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Request Sent Successfully!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Nav Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth Scroll Helper for Hero Tabs
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Filter Portfolio Items
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Toast Message Notification (replaces alert)
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showToast('Thank you! Your inquiry has been sent to Chapters.');
+            document.getElementById('quote-form').reset();
+        }
+    </script>
+</body>
+</html>
